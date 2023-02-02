@@ -3,6 +3,8 @@
       <title>Text Correction</title>
   </head>
   <body>
+<?php
+echo "sth"
       <h1>Correct Typos in Your Text</h1>
       <form action="/" method="post">
         <textarea name="text"></textarea>
@@ -13,5 +15,6 @@
         <h2>Corrected Text:</h2>
         <p>{{ corrected_text }}</p>
       {% endif %}
+      ?>
     </body>
 </html>
