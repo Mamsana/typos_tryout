@@ -5,17 +5,15 @@
       function submitForm() {
 	var text = document.querySelector("textarea[name='text']").value;
 
-	fetch("/correct-typo", {
-	  method: "POST",
-	  headers: {
-	    "Content-Type": "application/x-www-form-urlencoded"
-	  },
-	  body: "text=" + text
-	})
-	  .then(response => response.text())
-	  .then(data => {
-	    document.querySelector("#corrected-text").innerText = data;
-	  });
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "/correct-typo", true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.onreadystatechange = function() {
+	  if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+	    document.querySelector("#corrected-text").innerText = this.responseText;
+	  }
+        };
+        xhr.send("text=" + text);
       }
     </script>
   </head>
