@@ -14,7 +14,7 @@ def correct_typo():
         endpoint = "https://api.openai.com/v1/engines/davinci/completions"
         headers = {
             "Content-Type": "application/json",
-            "Authorization": "Bearer <API_KEY>"
+            "Authorization": f"Bearer {openai.api_key}"
         }
 
         data = {
@@ -32,4 +32,4 @@ def correct_typo():
     return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run()
+   i app.run()
