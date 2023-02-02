@@ -29,7 +29,7 @@ def correct_typo():
 
         return corrected_text
 
-    return render_template("index.html")
+    return render_template("index.html", corrected_text=corrected_text)
 
 if __name__ == "__main__":
    i app.run()
