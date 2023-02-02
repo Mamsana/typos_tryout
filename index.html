@@ -3,18 +3,18 @@
     <title>Text Correction</title>
     <script>
       function submitForm() {
-	var text = document.quesrySelector("textarea[name='text']").value;
+	var text = document.querySelector("textarea[name='text']").value;
 
 	fetch("/correct-typo", {
 	  method: "POST",
 	  headers: {
-	    "Content-Type": "application/json"
+	    "Content-Type": "application/x-www-form-urlencoded"
 	  },
-	  body: JSON.stringify({ text: text })
+	  body: "text=" + text
 	})
-	  .then(response => response.json())
+	  .then(response => response.text())
 	  .then(data => {
-	    document.querySelector("#corrected-text").innerText = data.corrected_text;
+	    document.querySelector("#corrected-text").innerText = data;
 	  });
       }
     </script>

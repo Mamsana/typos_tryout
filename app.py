@@ -27,7 +27,7 @@ def correct_typo():
 
         corrected_text = response.json()['choices'][0]['text']
 
-        return render_template('index.html', corrected_text=corrected_text)
+        return corrected_text
 
     return render_template("index.html")
 
