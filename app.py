@@ -23,7 +23,7 @@ def index():
         return render_template("index.html", corrected_text=corrected_text)
     return render_plate("index.html")
 
-@app.route("/correct", methods=["POST"])
+@app.route("/correct-typo", methods=["POST"])
 def correct_text():
     text = request.json["text"]
     response = openai.Completion.create(
