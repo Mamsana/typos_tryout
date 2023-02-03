@@ -14,7 +14,7 @@
 	})
 	  .then(response => response.json())
 	  .then(data => {
-	    document.querySelector("#corrected-text").innerText = this.responseText;
+	    document.querySelector("#corrected-text").innerText = data.corrected_text;
 	  });
       }
     </script>
