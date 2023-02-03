@@ -10,6 +10,9 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 def index():
     if request.method == "POST":
         text = request.form["text"]
+        headers = {
+            "Authorization": f"Bearer {openai.api_key}"
+        }
         response = openai.Completion.create(
             model="text-davinci-003",
             prompt=f"Correct typos in the following text;\n {text}\n",
