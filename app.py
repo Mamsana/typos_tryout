@@ -20,23 +20,8 @@ def index():
             presence_penalty=0
         )
         corrected_text = response.text
-        return render_template("index.html", corrected_text=corrected_text)
-    return render_plate("index.html")
-
-@app.route("/correct-typo", methods=["POST"])
-def correct_text():
-    text = request.json["text"]
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=f"Correct typos in the following text;\n {text}\n",
-        temperature=0.7,
-        max_tokens=256,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0
-    )
-    corrected_text = response.text
-    return {"corrected_text": corrected_text}
+        return corrected_text
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
