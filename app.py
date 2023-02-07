@@ -6,23 +6,33 @@ import openai
 app = Flask(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/complete_text", methods=["POST"])
+def complete_text():
+    prompt=f"Correct typos in the following text;\n {text}\n",
+    model_engine = "text-davinci-003"
+    completion_params = {
+        "model": model_engine,
+        "prompt": prompt,
+        "temperature": 0,
+        "max_tokens": 60,
+        "top_p": 1,
+        "frequency_penalty": 0,
+        "presence_penalty": 0
+    }
+    response = openai.Completion.create(
+        model=completion_params["model"],
+        prompt=completion_params["prompt"],
+        temperature=completion_params["temperature"],
+        max_tokens=completion_params["max_tokens"],
+        top_p=completion_params["max_tokens"],
+        frequency_penalty=completion_params["frequency_penalty"],
+        presence_penalty=completion_params["presence_penalty"],
+    )
+    return render_template('complete_text.html', completed_text=response["choices"][0]["text"])
+
+@app.route('/')
 def index():
-    if request.method == "POST":
-        text = request.form["text"]
-        response = openai.Completion.create(
-            model="text-davinci-003",
-            prompt=f"Correct typos in the following text;\n {text}\n",
-            temperature=0.7,
-            max_tokens=256,
-            top_p=1,
-            frequency_penalty=0,
-            presence_penalty=0
-        )
-        print (response)
-        corrected_text = response.text
-        print (corrected_text)
-    return render_template("index.html")
+    print(render_template('index.html'))
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
