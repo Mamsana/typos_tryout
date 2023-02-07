@@ -9,6 +9,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 @app.route("/complete_text", methods=["POST"])
 def complete_text():
     prompt=f"Correct typos in the following text;\n {text}\n",
+    text = request.form['prompt']
     model_engine = "text-davinci-003"
     completion_params = {
         "model": model_engine,
@@ -24,7 +25,7 @@ def complete_text():
         prompt=completion_params["prompt"],
         temperature=completion_params["temperature"],
         max_tokens=completion_params["max_tokens"],
-        top_p=completion_params["max_tokens"],
+        top_p=completion_params["top_p"],
         frequency_penalty=completion_params["frequency_penalty"],
         presence_penalty=completion_params["presence_penalty"],
     )
@@ -32,7 +33,7 @@ def complete_text():
 
 @app.route('/')
 def index():
-    print(render_template('index.html'))
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
